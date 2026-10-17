@@ -1,0 +1,39 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: hrms-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: hrms_db
+      POSTGRES_USER: hrms_user
+      POSTGRES_PASSWORD: hrms_password
+    ports:
+      - "5433:5432"
+    volumes:
+      - hrms_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U hrms_user -d hrms_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  hrms-backend:
+    build: .
+    container_name: hrms-backend
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DB_URL: jdbc:postgresql://postgres:5432/hrms_db
+      DB_USERNAME: hrms_user
+      DB_PASSWORD: hrms_password
+      JWT_SECRET: ${JWT_SECRET:-change-this-super-secret-key-in-production-min-256-bits-long-please}
+      SPRING_PROFILES_ACTIVE: prod
+      CORS_ALLOWED_ORIGINS: http://localhost:3000,http://localhost:5173
+      TZ: Asia/Kolkata
+    ports:
+      - "8080:8080"
+
+volumes:
+  hrms_pgdata:
