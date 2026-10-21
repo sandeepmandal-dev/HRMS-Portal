@@ -157,4 +157,4 @@ The backend reads these environment variables:
 
 ## Author
 
-**<your-name>** - [GitHub](https://github.com/<your-username>)
+**sandeepmandal-dev** - [GitHub](https://github.com/sandeepmandal-dev)
