@@ -98,10 +98,10 @@ Open **http://localhost:5173** and sign in.
 
 | Role     | Email                | Password       |
 |----------|----------------------|----------------|
-| Admin    | admin@hrms.test      | Admin@123      |
-| HR       | hr@hrms.test         | Hr@12345       |
-| Manager  | manager@hrms.test    | Manager@123    |
-| Employee | employee@hrms.test   | Employee@123   |
+| Admin    | admin@hrms.com     | Admin@123      |
+| HR       | hr@hrms.com        | Hr@12345       |
+| Manager  | manager@hrms.com    | Manager@123    |
+| Employee | employee@hrms.com   | Employee@123   |
 
 These accounts are for local testing only. Do not use them on a shared or live server.
 
