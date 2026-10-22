@@ -7,8 +7,10 @@ spring:
 
   datasource:
     url: ${DB_URL:jdbc:postgresql://localhost:5432/hrms_db}
-    username: ${DB_USERNAME:postgres}
-    password: ${DB_PASSWORD}
+#    //${DB_USERNAME:postgres}
+    username: postgres
+#    password: ${DB_PASSWORD}
+    password: Sandy@7079
     hikari:
       maximum-pool-size: ${DB_POOL_SIZE:10}
       minimum-idle: 2

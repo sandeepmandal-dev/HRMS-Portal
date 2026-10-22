@@ -9,6 +9,8 @@ import { extractErrorMessage } from '../../api/axiosClient'
 import { employeeSchema } from '../../utils/validators'
 import { ROLES, ROLE_LABELS, GENDERS } from '../../utils/constants'
 import { Modal, Input, Select, Button } from '../../components/ui'
+import { useState } from 'react';
+import { Eye, EyeOff } from 'lucide-react';
 
 export default function EmployeeFormModal({ open, onClose, onSuccess }) {
   const { data: departments } = useAsync(() => (open ? departmentApi.getAll() : Promise.resolve([])), [open])
@@ -24,6 +26,7 @@ export default function EmployeeFormModal({ open, onClose, onSuccess }) {
     reset,
     formState: { errors, isSubmitting },
   } = useForm({ resolver: zodResolver(employeeSchema) })
+  const [showPassword, setShowPassword] = useState(false);
 
   async function onSubmit(values) {
     try {
@@ -64,7 +67,16 @@ export default function EmployeeFormModal({ open, onClose, onSuccess }) {
             Account
           </legend>
           <Input label="Email address" type="email" required error={errors.email?.message} {...register('email')} />
-          <Input label="Temporary password" type="password" required error={errors.password?.message} {...register('password')} />
+          <div className="relative">
+         <Input label="Temporary password" type={showPassword ? 'text' : 'password'} required error={errors.password?.message}
+           {...register('password')}
+         />
+         <button type="button" onClick={() => setShowPassword((v) => !v)} className="absolute right-3 top-[34px] text-slate-400 hover:text-slate-600"
+           aria-label={showPassword ? 'Hide password' : 'Show password'}
+          >
+          {showPassword ? <EyeOff size={17} /> : <Eye size={17} />}
+         </button>
+        </div>
           <Select label="Role" required error={errors.role?.message} defaultValue="" {...register('role')}>
             <option value="" disabled>Select a role</option>
             {Object.values(ROLES).map((r) => (

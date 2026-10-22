@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import { UsersRound } from "lucide-react";
 import {
   LayoutGrid,
   Users,
@@ -76,11 +77,18 @@ function SidebarContent() {
   return (
     <div className="flex h-full flex-col bg-ink-900">
       <div className="flex items-center gap-2.5 px-5 py-6">
-        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-500">
+        {/* <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-500">
           <svg viewBox="0 0 32 32" fill="none" className="h-4 w-4">
             <path d="M9 9V23M9 16H16M16 9V23M23 9V23" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
-        </div>
+        </div> */}
+        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-600">
+            <UsersRound
+              className="h-6 w-6 text-white"
+              strokeWidth={1.8}
+              aria-hidden="true"
+           />
+          </div>
         <div>
           <p className="font-display text-base font-semibold leading-none text-white">HRMS</p>
           <p className="mt-1 text-[11px] leading-none text-slate-500">Workforce portal</p>

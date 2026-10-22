@@ -8,6 +8,7 @@ import toast from 'react-hot-toast'
 import { useAuthStore } from '../../store/authStore'
 import { loginSchema } from '../../utils/validators'
 import { Input, Button } from '../../components/ui'
+import { UsersRound } from "lucide-react";
 
 export default function Login() {
   const navigate = useNavigate()
@@ -41,10 +42,17 @@ export default function Login() {
     >
       <div className="mb-8 lg:hidden">
         <div className="flex items-center gap-2.5">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-500">
+          {/* <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-500">
             <svg viewBox="0 0 32 32" fill="none" className="h-4 w-4">
               <path d="M9 9V23M9 16H16M16 9V23M23 9V23" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
+          </div> */}
+          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-600">
+            <UsersRound
+              className="h-6 w-6 text-white"
+              strokeWidth={1.8}
+              aria-hidden="true"
+           />
           </div>
           <span className="font-display text-lg font-semibold text-ink">HRMS</span>
         </div>
