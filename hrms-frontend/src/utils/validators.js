@@ -1,5 +1,22 @@
 import { z } from 'zod'
 
+export function getMaxDateOfBirth() {
+  const today = new Date()
+  const year = today.getFullYear() - 18
+  const month = today.getMonth()
+  const day = Math.min(today.getDate(), new Date(year, month + 1, 0).getDate())
+
+  return `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`
+}
+
+const dateOfBirthSchema = z
+  .string()
+  .optional()
+  .or(z.literal(''))
+  .refine((dateOfBirth) => !dateOfBirth || dateOfBirth <= getMaxDateOfBirth(), {
+    message: 'Employee must be at least 18 years old',
+  })
+
 export const loginSchema = z.object({
   email: z.string().min(1, 'Email is required').email('Enter a valid email address'),
   password: z.string().min(1, 'Password is required'),
@@ -12,7 +29,7 @@ export const employeeSchema = z.object({
   firstName: z.string().min(1, 'First name is required'),
   lastName: z.string().min(1, 'Last name is required'),
   phone: z.string().optional().or(z.literal('')),
-  dateOfBirth: z.string().optional().or(z.literal('')),
+  dateOfBirth: dateOfBirthSchema,
   gender: z.string().optional().or(z.literal('')),
   address: z.string().optional().or(z.literal('')),
   dateOfJoining: z.string().min(1, 'Date of joining is required'),
@@ -26,7 +43,7 @@ export const employeeUpdateSchema = z.object({
   firstName: z.string().min(1, 'First name is required'),
   lastName: z.string().min(1, 'Last name is required'),
   phone: z.string().optional().or(z.literal('')),
-  dateOfBirth: z.string().optional().or(z.literal('')),
+  dateOfBirth: dateOfBirthSchema,
   gender: z.string().optional().or(z.literal('')),
   address: z.string().optional().or(z.literal('')),
   departmentId: z.string().optional().or(z.literal('')),

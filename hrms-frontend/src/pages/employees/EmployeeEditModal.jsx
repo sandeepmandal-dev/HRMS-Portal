@@ -7,7 +7,7 @@ import { employeeApi } from '../../api/employeeApi'
 import { departmentApi } from '../../api/departmentApi'
 import { designationApi } from '../../api/designationApi'
 import { extractErrorMessage } from '../../api/axiosClient'
-import { employeeUpdateSchema } from '../../utils/validators'
+import { employeeUpdateSchema, getMaxDateOfBirth } from '../../utils/validators'
 import { GENDERS } from '../../utils/constants'
 import { Modal, Input, Select, Button } from '../../components/ui'
 
@@ -69,7 +69,7 @@ export default function EmployeeEditModal({ open, onClose, onSuccess, employee }
           <Input label="First name" required error={errors.firstName?.message} {...register('firstName')} />
           <Input label="Last name" required error={errors.lastName?.message} {...register('lastName')} />
           <Input label="Phone" error={errors.phone?.message} {...register('phone')} />
-          <Input label="Date of birth" type="date" error={errors.dateOfBirth?.message} {...register('dateOfBirth')} />
+          <Input label="Date of birth" type="date" max={getMaxDateOfBirth()} error={errors.dateOfBirth?.message} {...register('dateOfBirth')} />
           <Select label="Gender" defaultValue="" {...register('gender')}>
             <option value="">Prefer not to say</option>
             {GENDERS.map((g) => (
